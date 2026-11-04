@@ -1,11 +1,15 @@
-// auth.ts
 import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import Credentials from "next-auth/providers/credentials";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY! // Use service role key for backend authentication checks
+);
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  secret: process.env.AUTH_SECRET,
   providers: [
-    CredentialsProvider({
+    Credentials({
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
@@ -14,35 +18,29 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
-        const inputEmail = String(credentials.email).toLowerCase().trim();
-        const inputPassword = String(credentials.password);
+        // Sign in using Supabase Auth
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: credentials.email as string,
+          password: credentials.password as string,
+        });
 
-        const adminEmail = process.env.ADMIN_EMAIL?.toLowerCase().trim();
-        const adminPassword = process.env.ADMIN_PASSWORD;
-
-        // Helpful terminal debugging
-        console.log("-----------------------------------------");
-        console.log("Input Email:", inputEmail);
-        console.log("Env Email:  ", adminEmail);
-        console.log("-----------------------------------------");
-
-        if (inputEmail === adminEmail && inputPassword === adminPassword) {
-          return {
-            id: "1",
-            email: inputEmail,
-            name: "IRITAQ Admin",
-            role: "admin",
-          };
+        if (error || !data.user) {
+          return null;
         }
 
-        return null;
+        // Optional: Check if user has admin role/metadata if applicable
+        return {
+          id: data.user.id,
+          email: data.user.email,
+          role: "admin", // or fetch from user metadata/database table
+        };
       },
     }),
   ],
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as { role?: string }).role || "user";
+        token.role = (user as { role?: string }).role;
       }
       return token;
     },
@@ -54,7 +52,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
   },
   pages: {
-    signIn: "/admin",
-    error: "/admin",
+    signIn: "/admin/dashboard",
   },
 });
