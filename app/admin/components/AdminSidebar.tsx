@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Session, createClient } from "@supabase/supabase-js";
+import { Session } from "@supabase/supabase-js";
+import { supabase } from "@/app/admin/utils/supabase";
 import {
   Home,
   Info,
@@ -25,10 +26,6 @@ import {
   Menu,
   X,
 } from "lucide-react";
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const NAV_ITEMS = [
   { label: "Home", href: "/admin/home", icon: Home },
