@@ -1,4 +1,31 @@
-// data/researchData.ts
+export interface NavigationCard {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  link: string;
+}
+
+export interface StatItem {
+  value: string;
+  label: string;
+}
+
+export interface ResearchDomain {
+  id: number;
+  title: string;
+  icon: string;
+}
+
+export interface OngoingProject {
+  id: string;
+  title: string;
+  author: string;
+  category: string;
+  status: string;
+  dateRange: string;
+  imageUrl: string;
+}
 
 export const researchData = {
   hero: {
@@ -6,8 +33,8 @@ export const researchData = {
     title: "Advancing Knowledge Through Excellence",
     description:
       "IRITAQ is committed to promoting high-impact research in Qur'anic studies and related disciplines, addressing contemporary issues and contributing to the global scholarly community.",
-    backgroundImage: "/images/quran2.jpg", // Desktop background image
-    mobileBackgroundImage: "/images/quran2-mobile.jpg", // Mobile background image
+    backgroundImage: "/images/quran2.jpg",
+    mobileBackgroundImage: "/images/quran2-mobile.jpg",
   },
   
   navigationCards: [
@@ -67,7 +94,7 @@ export const researchData = {
       icon: "FileCode",
       link: "#publications",
     },
-  ],
+  ] as NavigationCard[],
 
   stats: [
     { value: "12+", label: "RESEARCH DOMAINS" },
@@ -76,7 +103,7 @@ export const researchData = {
     { value: "250+", label: "PUBLICATIONS" },
     { value: "30+", label: "RESEARCH SCHOLARS" },
     { value: "15+", label: "RESEARCH GRANTS" },
-  ],
+  ] as StatItem[],
 
   domains: [
     { id: 1, title: "Tafsir and Qur'anic Exegesis", icon: "BookOpen" },
@@ -87,7 +114,7 @@ export const researchData = {
     { id: 6, title: "Comparative and Interfaith Studies", icon: "Building2" },
     { id: 7, title: "Digital Humanities & AI in Qur'anic Studies", icon: "Cpu" },
     { id: 8, title: "Contemporary Issues in Qur'anic Studies", icon: "FlaskConical" },
-  ],
+  ] as ResearchDomain[],
 
   ongoingProjects: [
     {
@@ -117,7 +144,7 @@ export const researchData = {
       dateRange: "Jan 2024 – Present",
       imageUrl: "/images/project-manuscript.jpg",
     },
-  ],
+  ] as OngoingProject[],
 
   cta: {
     title: "Contribute to Knowledge. Inspire Humanity.",

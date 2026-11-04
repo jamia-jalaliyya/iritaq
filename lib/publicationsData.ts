@@ -25,7 +25,7 @@ export const publicationsData = {
     description:
       "Peer-reviewed journals, books, monographs, proceedings and digital collections published by the Institute and its international collaborators.",
     buttonText: "Submit Your Research",
-    buttonLink: "/submit-research",
+    buttonLink: "/research",
     backgroundImage: "/images/lib.jpe",
     mobileBackgroundImage: "/images/lib-mobile.jpe",
   },
