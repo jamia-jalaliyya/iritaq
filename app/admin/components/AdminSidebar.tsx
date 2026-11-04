@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
+import { Session, createClient } from "@supabase/supabase-js";
 import {
   Home,
   Info,
@@ -26,6 +26,10 @@ import {
   X,
 } from "lucide-react";
 
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
 const NAV_ITEMS = [
   { label: "Home", href: "/admin/home", icon: Home },
   { label: "About", href: "/admin/about", icon: Info },
@@ -47,16 +51,49 @@ const NAV_ITEMS = [
 
 export default function AdminSidebar() {
   const pathname = usePathname();
-  const { data: session, status } = useSession();
+  const router = useRouter();
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
+  // Fetch active Supabase session on mount & subscribe to changes
+  useEffect(() => {
+    async function getActiveSession() {
+      try {
+        const { data: { session: currentSession } } = await supabase.auth.getSession();
+        setSession(currentSession);
+      } catch (err) {
+        console.error("Error checking sidebar session:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    getActiveSession();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, currentSession) => {
+      setSession(currentSession);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
   // 🔴 DO NOT RENDER SIDEBAR IF USER IS NOT LOGGED IN
-  if (status === "loading" || !session) {
+  if (loading || !session) {
     return null;
   }
 
   const toggleMobileMenu = () => setIsMobileOpen((prev) => !prev);
   const closeMobileMenu = () => setIsMobileOpen(false);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setSession(null);
+    router.push("/admin/dashboard");
+    router.refresh();
+  };
 
   return (
     <>
@@ -69,11 +106,10 @@ export default function AdminSidebar() {
           <span className="font-serif font-bold text-sm tracking-wide">
             IRITAQ Admin
           </span>
-          
         </div>
         <button
           onClick={toggleMobileMenu}
-          className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-neutral-800 focus:outline-none"
+          className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-neutral-800 focus:outline-none cursor-pointer"
         >
           {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -96,11 +132,11 @@ export default function AdminSidebar() {
         {/* Brand Header */}
         <div className="p-5 border-b border-slate-800 flex items-center justify-between">
           <Link
-            href="/admin"
+            href="/admin/dashboard"
             onClick={closeMobileMenu}
             className="flex items-center gap-3 group"
           >
-            <div className="w-9 h-9 rounded-xl bg-linear-to-tr from-emerald-800 to-emerald-600 flex items-center justify-center font-bold text-white shadow-md group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-800 to-emerald-600 flex items-center justify-center font-bold text-white shadow-md group-hover:scale-105 transition-transform">
               I
             </div>
             <div>
@@ -121,10 +157,10 @@ export default function AdminSidebar() {
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-xs font-medium text-white truncate">
-              {session.user?.name || "Admin User"}
+              {session.user?.email || "Admin User"}
             </p>
             <p className="text-[11px] text-slate-400 truncate">
-              {session.user?.email || "admin@iritaq.org"}
+              Authorized User
             </p>
           </div>
         </div>
@@ -177,7 +213,7 @@ export default function AdminSidebar() {
           </Link>
 
           <button
-            onClick={() => signOut({ callbackUrl: "/admin", redirect: true })}
+            onClick={handleSignOut}
             className="flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-xs font-medium text-rose-400 hover:text-rose-300 hover:bg-rose-950/30 transition cursor-pointer"
           >
             <span className="flex items-center gap-2">

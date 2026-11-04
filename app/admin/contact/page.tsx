@@ -1,13 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/app/admin/utils/supabase";
 import { HERO_CONTACT_DATA, DEPARTMENTS_DATA, CAMPUS_INFO } from "@/lib/contactData";
 import { Loader2, Upload, Plus, Trash2, Save, CheckCircle2, Inbox, Settings, Mail, Phone, Building2, Calendar, FileText } from "lucide-react";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 interface Submission {
   id: string;

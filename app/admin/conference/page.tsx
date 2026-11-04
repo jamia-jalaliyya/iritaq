@@ -1,13 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/app/admin/utils/supabase";
 import { conferenceData, ConferenceData } from "@/lib/conferenceData";
 import { Loader2, Upload, Plus, Trash2, Save, CheckCircle2 } from "lucide-react";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function ConferenceAdminPage() {
   const [data, setData] = useState<ConferenceData>(conferenceData);

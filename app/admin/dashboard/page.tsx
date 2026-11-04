@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Session, createClient } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
+import { Session } from "@supabase/supabase-js";
+import { supabase } from "@/app/admin/utils/supabase";
 import {
   Lock,
   Mail,
@@ -25,16 +27,12 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
 const MANAGEMENT_PAGES = [
   { name: "Home", href: "/admin/home", icon: Home, description: "Manage hero banners, announcements, and homepage layout." },
   { name: "About", href: "/admin/about", icon: Info, description: "Manage mission, vision, history, and overview." },
   { name: "Governance", href: "/admin/governance", icon: Shield, description: "Manage leadership, board members, and policies." },
   { name: "Research", href: "/admin/research", icon: Search, description: "Manage research projects, labs, and domain areas." },
-  { name: "Academic Departments", href: "/admin/academic-departments", icon: GraduationCap, description: "Manage faculties, departments, and staff rosters." },
+  { name: "Academic Departments", href: "/admin/departments", icon: GraduationCap, description: "Manage faculties, departments, and staff rosters." },
   { name: "Publications", href: "/admin/publications", icon: BookOpen, description: "Manage journals, papers, and publication catalogs." },
   { name: "Conference", href: "/admin/conference", icon: Users, description: "Manage upcoming/past conferences and registrations." },
   { name: "Academic Programs", href: "/admin/academic-programs", icon: Award, description: "Manage degree programs, courses, and curricula." },
@@ -49,6 +47,7 @@ const MANAGEMENT_PAGES = [
 ];
 
 export default function AdminPage() {
+  const router = useRouter();
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -58,7 +57,7 @@ export default function AdminPage() {
   const [loginError, setLoginError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Check active Supabase session on mount
+  // Check active Supabase session on mount & subscribe to changes
   useEffect(() => {
     async function getActiveSession() {
       try {
@@ -73,7 +72,6 @@ export default function AdminPage() {
 
     getActiveSession();
 
-    // Listen for auth state changes (login, logout, token refresh)
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, currentSession) => {
       setSession(currentSession);
     });
@@ -101,6 +99,8 @@ export default function AdminPage() {
 
       if (data.session) {
         setSession(data.session);
+        // Refresh router so AdminLayout and Middleware immediately register session cookies
+        router.refresh();
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Invalid credentials. Please check your email and password.";
@@ -108,6 +108,12 @@ export default function AdminPage() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setSession(null);
+    router.refresh();
   };
 
   // ---------------------------------------------------------------------------
@@ -224,10 +230,7 @@ export default function AdminPage() {
               {MANAGEMENT_PAGES.length} Modules Available
             </span>
             <button
-              onClick={async () => {
-                await supabase.auth.signOut();
-                setSession(null);
-              }}
+              onClick={handleSignOut}
               className="text-xs bg-slate-200 hover:bg-rose-100 hover:text-rose-700 text-slate-700 font-medium px-3 py-1.5 rounded-lg transition cursor-pointer"
             >
               Sign Out

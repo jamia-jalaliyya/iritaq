@@ -1,13 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/app/admin/utils/supabase";
 import { defaultAboutData, AboutPageData } from "@/lib/aboutDefaultData";
 import { Loader2, Upload, Plus, Trash2, Save, CheckCircle2 } from "lucide-react";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function AboutAdminPage() {
   const [data, setData] = useState<AboutPageData>(defaultAboutData);

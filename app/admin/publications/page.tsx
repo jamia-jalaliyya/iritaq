@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/app/admin/utils/supabase";
 import { publicationsData, Publication } from "@/lib/publicationsData";
 import {
   Loader2,
@@ -13,9 +13,6 @@ import {
   Settings,
 } from "lucide-react";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function PublicationsAdminPage() {
   // Hero State

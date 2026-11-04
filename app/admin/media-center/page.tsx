@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/app/admin/utils/supabase";
 import {
   defaultMediaData as DEFAULT_DATA,
   VideoGalleryItem,
@@ -24,9 +24,6 @@ import {
   Video,
 } from "lucide-react";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function MediaAdminPage() {
   // Hero State

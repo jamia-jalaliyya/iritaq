@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/app/admin/utils/supabase";
 import {
   digitalLibraryData,
   LibraryCategory,
@@ -10,9 +10,6 @@ import {
 } from "@/lib/digitalLibraryData";
 import { Loader2, Upload, Plus, Trash2, Save, CheckCircle2, Settings } from "lucide-react";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function DigitalLibraryAdminPage() {
   // Hero States

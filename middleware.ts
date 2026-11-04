@@ -1,29 +1,54 @@
-// middleware.ts
-import { NextResponse } from 'next/server';
-import { auth } from '@/auth';
+import { type NextRequest, NextResponse } from "next/server";
+import { createServerClient } from "@supabase/ssr";
 
-export default auth((req) => {
-  const isLoggedIn = !!req.auth;
-  const role = (req.auth?.user as { role?: string })?.role;
-  const pathname = req.nextUrl.pathname;
+export async function middleware(request: NextRequest) {
+  let response = NextResponse.next({
+    request: {
+      headers: request.headers,
+    },
+  });
 
-  // 1. Redirect users visiting exact `/admin` directly to `/admin/dashboard`
-  if (pathname === '/admin') {
-    return NextResponse.redirect(new URL('/admin/dashboard', req.url));
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value)
+          );
+          response = NextResponse.next({
+            request,
+          });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            response.cookies.set(name, value, options)
+          );
+        },
+      },
+    }
+  );
+
+  // Refresh session if expired and get user
+  const { data: { user } } = await supabase.auth.getUser();
+  const pathname = request.nextUrl.pathname;
+
+  if (pathname === "/admin") {
+    return NextResponse.redirect(new URL("/admin/dashboard", request.url));
   }
 
-  // 2. Protect sub-routes (e.g. /admin/settings, /admin/domains, etc.) for non-admins
-  // Keep /admin/dashboard accessible so unauthenticated users can see the login form
-  const isProtectedAdminRoute =
-    pathname.startsWith('/admin/') && pathname !== '/admin/dashboard';
+  // Protect sub-routes under /admin/ (except login/dashboard)
+  const isProtectedSubRoute = pathname.startsWith("/admin/") && pathname !== "/admin/dashboard";
 
-  if (isProtectedAdminRoute && (!isLoggedIn || role !== 'admin')) {
-    return NextResponse.redirect(new URL('/admin/dashboard', req.url));
+  if (isProtectedSubRoute && !user) {
+    return NextResponse.redirect(new URL("/admin/dashboard", request.url));
   }
 
-  return NextResponse.next();
-});
+  return response;
+}
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ["/admin", "/admin/:path*"],
 };

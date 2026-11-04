@@ -1,15 +1,10 @@
 // app/admin/layout.tsx
-import AuthProvider from "@/app/admin/components/AuthProvider";
-import AdminLayoutContent from "@/app/admin/components/AdminLayoutContent";
+import AdminLayoutContent from "./components/AdminLayoutContent";
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <AuthProvider>
-      <AdminLayoutContent>{children}</AdminLayoutContent>
-    </AuthProvider>
-  );
+  return <AdminLayoutContent>{children}</AdminLayoutContent>;
 }

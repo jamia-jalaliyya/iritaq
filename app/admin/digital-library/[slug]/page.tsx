@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, use } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/app/admin/utils/supabase";
 import {
   collectionData as DEFAULT_DATA,
   CollectionResource,
@@ -9,9 +9,6 @@ import {
 } from "@/lib/digitalLibraryCollectionData";
 import { Loader2, Upload, Plus, Trash2, Save, CheckCircle2, Settings } from "lucide-react";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 interface PageProps {
   params: Promise<{ slug: string }>;
