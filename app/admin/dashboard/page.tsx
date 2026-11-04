@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { signIn, useSession } from "next-auth/react";
+import { Session, createClient } from "@supabase/supabase-js";
 import {
   Lock,
   Mail,
@@ -25,6 +25,10 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
 const MANAGEMENT_PAGES = [
   { name: "Home", href: "/admin/home", icon: Home, description: "Manage hero banners, announcements, and homepage layout." },
   { name: "About", href: "/admin/about", icon: Info, description: "Manage mission, vision, history, and overview." },
@@ -45,7 +49,8 @@ const MANAGEMENT_PAGES = [
 ];
 
 export default function AdminPage() {
-  const { data: session, status } = useSession();
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
 
   // Login Form Local State
   const [email, setEmail] = useState("");
@@ -53,29 +58,62 @@ export default function AdminPage() {
   const [loginError, setLoginError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // NextAuth Login Handler
-  const handleNextAuthLogin = async (e: React.FormEvent) => {
+  // Check active Supabase session on mount
+  useEffect(() => {
+    async function getActiveSession() {
+      try {
+        const { data: { session: currentSession } } = await supabase.auth.getSession();
+        setSession(currentSession);
+      } catch (err) {
+        console.error("Error checking auth session:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    getActiveSession();
+
+    // Listen for auth state changes (login, logout, token refresh)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, currentSession) => {
+      setSession(currentSession);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  // Supabase Credentials Login Handler
+  const handleSupabaseLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setLoginError("");
 
-    const res = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    setIsSubmitting(false);
+      if (error) {
+        throw error;
+      }
 
-    if (res?.error) {
-      setLoginError("Invalid credentials. Please check your email and password.");
+      if (data.session) {
+        setSession(data.session);
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Invalid credentials. Please check your email and password.";
+      setLoginError(msg);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   // ---------------------------------------------------------------------------
   // 1. LOADING STATE
   // ---------------------------------------------------------------------------
-  if (status === "loading") {
+  if (loading) {
     return (
       <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center text-white">
         <Loader2 className="w-8 h-8 animate-spin text-emerald-500 mb-3" />
@@ -87,7 +125,7 @@ export default function AdminPage() {
   }
 
   // ---------------------------------------------------------------------------
-  // 2. NEXTAUTH LOGIN SCREEN (Unauthenticated)
+  // 2. SUPABASE LOGIN SCREEN (Unauthenticated)
   // ---------------------------------------------------------------------------
   if (!session) {
     return (
@@ -101,7 +139,7 @@ export default function AdminPage() {
               IRITAQ Admin Portal
             </h1>
             <p className="text-xs text-slate-500 mt-1 uppercase tracking-wider font-semibold">
-            Authenticated Session
+              Supabase Secure Session
             </p>
           </div>
 
@@ -112,7 +150,7 @@ export default function AdminPage() {
             </div>
           )}
 
-          <form onSubmit={handleNextAuthLogin} className="space-y-5">
+          <form onSubmit={handleSupabaseLogin} className="space-y-5">
             <div>
               <label className="block text-xs font-semibold uppercase text-slate-600 mb-2">
                 Email Address
@@ -150,7 +188,7 @@ export default function AdminPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-emerald-700 hover:bg-emerald-800 disabled:bg-slate-400 text-white font-medium py-3 rounded-lg text-sm transition shadow-md flex items-center justify-center gap-2"
+              className="w-full bg-emerald-700 hover:bg-emerald-800 disabled:bg-slate-400 text-white font-medium py-3 rounded-lg text-sm transition shadow-md flex items-center justify-center gap-2 cursor-pointer"
             >
               {isSubmitting ? (
                 <>
@@ -171,8 +209,6 @@ export default function AdminPage() {
   // ---------------------------------------------------------------------------
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col font-sans">
-
-      {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
         <div className="bg-white rounded-xl shadow-sm border border-slate-200/80 p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
@@ -183,9 +219,20 @@ export default function AdminPage() {
               Select a page section below to redirect to its dedicated management module.
             </p>
           </div>
-          <span className="self-start md:self-auto text-xs px-3 py-1 bg-emerald-50 text-emerald-800 font-medium rounded-full border border-emerald-200">
-            {MANAGEMENT_PAGES.length} Modules Available
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="text-xs px-3 py-1 bg-emerald-50 text-emerald-800 font-medium rounded-full border border-emerald-200">
+              {MANAGEMENT_PAGES.length} Modules Available
+            </span>
+            <button
+              onClick={async () => {
+                await supabase.auth.signOut();
+                setSession(null);
+              }}
+              className="text-xs bg-slate-200 hover:bg-rose-100 hover:text-rose-700 text-slate-700 font-medium px-3 py-1.5 rounded-lg transition cursor-pointer"
+            >
+              Sign Out
+            </button>
+          </div>
         </div>
 
         {/* Navigation Grid */}
