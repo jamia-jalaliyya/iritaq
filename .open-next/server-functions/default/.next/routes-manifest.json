@@ -1,0 +1,302 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "onMatchHeaders": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/admin/digital-library/resource/[id]",
+      "regex": "^/admin/digital\\-library/resource/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/admin/digital\\-library/resource/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/admin/digital-library/[slug]",
+      "regex": "^/admin/digital\\-library/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/admin/digital\\-library/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/auth/[...nextauth]",
+      "regex": "^/api/auth/(.+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPnextauth": "nxtPnextauth"
+      },
+      "namedRegex": "^/api/auth/(?<nxtPnextauth>.+?)(?:/)?$"
+    },
+    {
+      "page": "/digital-library/resource/[id]",
+      "regex": "^/digital\\-library/resource/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/digital\\-library/resource/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/digital-library/[slug]",
+      "regex": "^/digital\\-library/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/digital\\-library/(?<nxtPslug>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/about",
+      "regex": "^/about(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/about(?:/)?$"
+    },
+    {
+      "page": "/academic-programs",
+      "regex": "^/academic\\-programs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/academic\\-programs(?:/)?$"
+    },
+    {
+      "page": "/admin",
+      "regex": "^/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin(?:/)?$"
+    },
+    {
+      "page": "/admin/about",
+      "regex": "^/admin/about(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/about(?:/)?$"
+    },
+    {
+      "page": "/admin/academic-programs",
+      "regex": "^/admin/academic\\-programs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/academic\\-programs(?:/)?$"
+    },
+    {
+      "page": "/admin/admission",
+      "regex": "^/admin/admission(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/admission(?:/)?$"
+    },
+    {
+      "page": "/admin/conference",
+      "regex": "^/admin/conference(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/conference(?:/)?$"
+    },
+    {
+      "page": "/admin/contact",
+      "regex": "^/admin/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/contact(?:/)?$"
+    },
+    {
+      "page": "/admin/dashboard",
+      "regex": "^/admin/dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/dashboard(?:/)?$"
+    },
+    {
+      "page": "/admin/departments",
+      "regex": "^/admin/departments(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/departments(?:/)?$"
+    },
+    {
+      "page": "/admin/digital-library",
+      "regex": "^/admin/digital\\-library(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/digital\\-library(?:/)?$"
+    },
+    {
+      "page": "/admin/governance",
+      "regex": "^/admin/governance(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/governance(?:/)?$"
+    },
+    {
+      "page": "/admin/home",
+      "regex": "^/admin/home(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/home(?:/)?$"
+    },
+    {
+      "page": "/admin/international-partnerships",
+      "regex": "^/admin/international\\-partnerships(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/international\\-partnerships(?:/)?$"
+    },
+    {
+      "page": "/admin/journal",
+      "regex": "^/admin/journal(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/journal(?:/)?$"
+    },
+    {
+      "page": "/admin/media-center",
+      "regex": "^/admin/media\\-center(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/media\\-center(?:/)?$"
+    },
+    {
+      "page": "/admin/news",
+      "regex": "^/admin/news(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/news(?:/)?$"
+    },
+    {
+      "page": "/admin/publications",
+      "regex": "^/admin/publications(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/publications(?:/)?$"
+    },
+    {
+      "page": "/admin/research",
+      "regex": "^/admin/research(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/research(?:/)?$"
+    },
+    {
+      "page": "/admission",
+      "regex": "^/admission(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admission(?:/)?$"
+    },
+    {
+      "page": "/api/admin/homepage",
+      "regex": "^/api/admin/homepage(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin/homepage(?:/)?$"
+    },
+    {
+      "page": "/conference",
+      "regex": "^/conference(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/conference(?:/)?$"
+    },
+    {
+      "page": "/contact",
+      "regex": "^/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contact(?:/)?$"
+    },
+    {
+      "page": "/departments",
+      "regex": "^/departments(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/departments(?:/)?$"
+    },
+    {
+      "page": "/digital-library",
+      "regex": "^/digital\\-library(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/digital\\-library(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/governance",
+      "regex": "^/governance(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/governance(?:/)?$"
+    },
+    {
+      "page": "/international-partnerships",
+      "regex": "^/international\\-partnerships(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/international\\-partnerships(?:/)?$"
+    },
+    {
+      "page": "/journal",
+      "regex": "^/journal(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/journal(?:/)?$"
+    },
+    {
+      "page": "/media-center",
+      "regex": "^/media\\-center(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/media\\-center(?:/)?$"
+    },
+    {
+      "page": "/news",
+      "regex": "^/news(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/news(?:/)?$"
+    },
+    {
+      "page": "/publications",
+      "regex": "^/publications(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/publications(?:/)?$"
+    },
+    {
+      "page": "/research",
+      "regex": "^/research(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/research(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

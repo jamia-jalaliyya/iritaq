@@ -1,0 +1,155 @@
+{
+  "app": {
+    "[project]/app/_not-found/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/about/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/academic-programs/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/about/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/academic-programs/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/admission/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/conference/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/contact/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/dashboard/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/departments/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/digital-library/[slug]/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/digital-library/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/digital-library/resource/[id]/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/governance/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/home/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/international-partnerships/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/journal/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/media-center/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/news/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/publications/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admin/research/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/admission/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/conference/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/contact/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/departments/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/digital-library/[slug]/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/digital-library/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/digital-library/resource/[id]/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/governance/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/international-partnerships/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/journal/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/media-center/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/news/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/publications/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ],
+    "[project]/app/research/page": [
+      "static/media/605ce01b664af129-s.p.0wgildi0cnwt9.woff2",
+      "static/media/07a39a8a4660cc7c-s.p.0r6juujl39pe6.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}
