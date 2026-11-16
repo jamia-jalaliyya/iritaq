@@ -42,3 +42,12 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# OpenNext & Cloudflare build artifacts
+.open-next/
+.wrangler/
+.cloudflare/
+
+# Local environment variables (DO NOT push secrets!)
+.dev.vars
+.env*.local
