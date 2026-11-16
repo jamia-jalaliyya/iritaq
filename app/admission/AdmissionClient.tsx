@@ -127,9 +127,6 @@ export function AdmissionClient({ data }: AdmissionClientProps) {
                   />
                 </svg>
               </a>
-              <button className="inline-flex items-center justify-center px-6 py-3.5 bg-transparent border border-white/40 hover:border-white text-white text-sm font-medium rounded transition-colors duration-200">
-                Download Prospectus
-              </button>
             </div>
           </div>
         </div>
@@ -233,9 +230,7 @@ export function AdmissionClient({ data }: AdmissionClientProps) {
               >
                 Apply for Masters
               </a>
-              <button className="px-5 py-3 bg-transparent border border-white/30 hover:border-white text-white text-xs font-semibold rounded transition-colors">
-                Download Syllabus
-              </button>
+              
             </div>
           </div>
 

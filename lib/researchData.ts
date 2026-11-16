@@ -150,8 +150,8 @@ export const researchData = {
     title: "Contribute to Knowledge. Inspire Humanity.",
     description: "Join our research community and be part of a global mission to advance Qur'anic scholarship and serve humanity.",
     primaryButtonText: "Join as Researcher",
-    primaryButtonLink: "/join-researcher",
+    primaryButtonLink: "mailto:research@iritaq.info?subject=Research%20Proposal%20Submission&body=Dear%20IRITAQ%20Research%20Team,%0D%0A%0D%0APlease%20find%20attached%20/%20detailed%20below%20my%20research%20proposal.%0D%0A%0D%0A[Enter%20your%20proposal%20details%20here]",
     secondaryButtonText: "Collaborate With Us",
-    secondaryButtonLink: "/collaborate",
+    secondaryButtonLink: "/contact",
   },
 };

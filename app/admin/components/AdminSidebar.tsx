@@ -25,6 +25,7 @@ import {
   ChevronRight,
   Menu,
   X,
+  Book,
 } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -40,6 +41,7 @@ const NAV_ITEMS = [
   { label: "Digital Library Collections", href: "/admin/digital-library/collections", icon: Library },
   { label: "Digital Library Details", href: "/admin/digital-library/details", icon: Library },
   { label: "International Partnerships", href: "/admin/international-partnerships", icon: Globe },
+  { label: "Journal", href: "/admin/journal", icon: Book },
   { label: "News", href: "/admin/news", icon: Newspaper },
   { label: "Media Center", href: "/admin/media-center", icon: Video },
   { label: "Admission", href: "/admin/admission", icon: UserCheck },
@@ -133,7 +135,7 @@ export default function AdminSidebar() {
             onClick={closeMobileMenu}
             className="flex items-center gap-3 group"
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-800 to-emerald-600 flex items-center justify-center font-bold text-white shadow-md group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-linear-to-tr from-emerald-800 to-emerald-600 flex items-center justify-center font-bold text-white shadow-md group-hover:scale-105 transition-transform">
               I
             </div>
             <div>

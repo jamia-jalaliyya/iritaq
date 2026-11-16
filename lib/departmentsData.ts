@@ -126,6 +126,6 @@ export const departmentsData = {
     tag: "STUDY WITH US",
     title: "Programmes are offered through the departments",
     buttonText: "View Academic Programmes",
-    buttonLink: "/programmes",
+    buttonLink: "/academic-programs",
   },
 };

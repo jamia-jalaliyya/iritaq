@@ -21,7 +21,6 @@ export interface FeaturedConference {
   location: string;
   highlights: string[];
   detailsLink: string;
-  brochureLink: string;
   image: string;
   imageMobile?: string;
 }
@@ -108,7 +107,7 @@ export const FEATURED_CONFERENCE_DATA: FeaturedConference = {
     "Building International Collaborations",
   ],
   detailsLink: "/conference/tafsir-contemporary-issues-2026",
-  brochureLink: "/files/tafsir-conference-2026-brochure.pdf",
+  
   image: "/images/featured-conference.jpg",
   imageMobile: "/images/featured-conference.jpg",
 };

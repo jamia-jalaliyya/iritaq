@@ -43,9 +43,6 @@ async function getConferenceData(): Promise<ConferenceData> {
         detailsLink:
           s.featured_details_link ??
           conferenceData.featuredConference.detailsLink,
-        brochureLink:
-          s.featured_brochure_link ??
-          conferenceData.featuredConference.brochureLink,
         image: s.featured_image ?? conferenceData.featuredConference.image,
         imageMobile:
           s.featured_image_mobile ??

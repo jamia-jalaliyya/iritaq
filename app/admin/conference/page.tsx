@@ -41,7 +41,6 @@ export default function ConferenceAdminPage() {
               location: s.featured_location ?? conferenceData.featuredConference.location,
               highlights: s.featured_highlights?.length ? s.featured_highlights : conferenceData.featuredConference.highlights,
               detailsLink: s.featured_details_link ?? conferenceData.featuredConference.detailsLink,
-              brochureLink: s.featured_brochure_link ?? conferenceData.featuredConference.brochureLink,
               image: s.featured_image ?? conferenceData.featuredConference.image,
               imageMobile: s.featured_image_mobile ?? conferenceData.featuredConference.imageMobile,
             },
@@ -144,7 +143,6 @@ export default function ConferenceAdminPage() {
         featured_location: data.featuredConference.location,
         featured_highlights: data.featuredConference.highlights,
         featured_details_link: data.featuredConference.detailsLink,
-        featured_brochure_link: data.featuredConference.brochureLink,
         featured_image: data.featuredConference.image,
         featured_image_mobile: data.featuredConference.imageMobile,
         forums_tag: data.forumsSection.tag,
@@ -466,20 +464,13 @@ export default function ConferenceAdminPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Details Link / Brochure Link</label>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Details Link</label>
                 <div className="flex gap-2">
                   <input
                     type="text"
                     placeholder="Details Link"
                     value={data.featuredConference.detailsLink}
                     onChange={(e) => setData({ ...data, featuredConference: { ...data.featuredConference, detailsLink: e.target.value } })}
-                    className="w-1/2 bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Brochure PDF Link"
-                    value={data.featuredConference.brochureLink}
-                    onChange={(e) => setData({ ...data, featuredConference: { ...data.featuredConference, brochureLink: e.target.value } })}
                     className="w-1/2 bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs"
                   />
                 </div>

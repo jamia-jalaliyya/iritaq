@@ -283,13 +283,13 @@ export default function ResearchPageClient({
           </div>
 
           <div>
-            <Link
-              href="/submit-proposal"
-              className="inline-flex items-center gap-2 bg-emerald-800 hover:bg-emerald-900 text-white text-xs sm:text-sm font-medium px-6 py-3.5 rounded-full transition shadow-md"
-            >
-              <span>Submit Your Research Proposal</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <a
+  href="mailto:research@iritaq.info?subject=Research%20Proposal%20Submission&body=Dear%20IRITAQ%20Research%20Team,%0D%0A%0D%0APlease%20find%20attached%20/%20detailed%20below%20my%20research%20proposal.%0D%0A%0D%0A[Enter%20your%20proposal%20details%20here]"
+  className="inline-flex items-center gap-2 bg-emerald-800 hover:bg-emerald-900 text-white text-xs sm:text-sm font-medium px-6 py-3.5 rounded-full transition shadow-md cursor-pointer"
+>
+  <span>Submit Your Research Proposal</span>
+  <ArrowRight className="w-4 h-4" />
+</a>
           </div>
         </div>
       </section>

@@ -8,10 +8,10 @@ interface MemberCardProps {
   aspectRatio?: string;
 }
 
-export function MemberCard({ 
-  member, 
+export function MemberCard({
+  member,
   isDarkContainer = false,
-  aspectRatio = "aspect-[4/5]" 
+  aspectRatio = "aspect-[4/5]",
 }: MemberCardProps) {
   const isAmber = member.badgeVariant === "amber";
   const designationText = member.designation || "";
@@ -27,53 +27,72 @@ export function MemberCard({
   };
 
   return (
-    <div className="group flex flex-col items-center text-center w-full">
-      {/* Outer Card Container */}
-      <div 
-        className={`relative w-full ${aspectRatio} rounded-2xl sm:rounded-3xl overflow-hidden bg-[#d8ebf9] border border-slate-200/80 shadow-sm group-hover:shadow-md transition-all duration-300 flex flex-col justify-between`}
-      >
-        {/* Photo Container - Fills full space above/behind banner without cutoff */}
-        <div className="relative w-full h-full flex-1">
-          <Image
-            src={member.imageUrl}
-            alt={member.name}
-            fill
-            className="object-cover object-[center_15%] scale-105 group-hover:scale-110 transition-transform duration-500"
-          />
-        </div>
-
-        {/* Slimmer Solid Banner at Bottom */}
-        <div 
-          className={`relative z-10 w-full h-10 sm:h-11 px-1.5 flex items-center justify-center transition-colors shrink-0 ${
-            isAmber 
-              ? "bg-amber-800 text-white" 
-              : "bg-[#1b4d3e] text-white"
-          }`}
-        >
-          {/* Caret/Triangle Peak */}
-          <div 
-            className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[5px] border-t-[#d8ebf9]" 
-          />
-
-          {/* Designation Text */}
-          <span 
-            className={`font-semibold uppercase text-center leading-[1.05] tracking-tight whitespace-normal wrap-break-word ${getFontSizeClass(designationText)}`}
-          >
-            {designationText}
-          </span>
-        </div>
-      </div>
-
-      {/* Member Name */}
-      <h3 
-        className={`mt-3.5 text-xs sm:text-sm md:text-base font-serif font-medium leading-snug transition-colors ${
-          isDarkContainer 
-            ? "text-white group-hover:text-amber-300" 
-            : "text-slate-800 group-hover:text-emerald-800"
+    <div
+      className={`group rounded-2xl overflow-hidden transition-all duration-300 flex flex-col w-full ${
+        isDarkContainer
+          ? "bg-emerald-900/40 border border-emerald-800/60 shadow-lg hover:border-emerald-500/60 hover:shadow-emerald-950/50"
+          : "bg-white border border-slate-200/80 shadow-xs hover:shadow-xl hover:border-emerald-700/30"
+      }`}
+    >
+      {/* Full-Bleed Portrait Container */}
+      <div
+        className={`relative w-full ${aspectRatio} overflow-hidden ${
+          isDarkContainer ? "bg-emerald-950" : "bg-[#d8ebf9]"
         }`}
       >
-        {member.name}
-      </h3>
+        <Image
+          src={member.imageUrl}
+          alt={member.name}
+          fill
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+          className="object-cover object-[center_15%] scale-105 group-hover:scale-110 transition-transform duration-500 ease-out"
+        />
+
+        {/* Smooth Gradient Vignette for Floating Pill Contrast */}
+        <div
+          className={`absolute inset-0 bg-linear-to-t ${
+            isDarkContainer
+              ? "from-emerald-950/90 via-emerald-950/15 to-transparent"
+              : "from-slate-950/75 via-slate-950/10 to-transparent"
+          } opacity-90`}
+        />
+
+        {/* Floating Glassmorphic Designation Pill */}
+        {designationText && (
+          <div className="absolute bottom-2.5 inset-x-2.5 z-10">
+            <span
+              className={`block w-full py-1.5 px-2 rounded-lg backdrop-blur-md shadow-sm font-semibold uppercase text-center leading-[1.1] tracking-wide whitespace-normal wrap-break-word transition-colors ${getFontSizeClass(
+                designationText
+              )} ${
+                isAmber
+                  ? "bg-amber-900/90 text-amber-50 border border-amber-500/40"
+                  : isDarkContainer
+                  ? "bg-emerald-950/85 text-amber-300 border border-emerald-700/60"
+                  : "bg-[#1b4d3e]/90 text-white border border-white/15"
+              }`}
+            >
+              {designationText}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Unified Editorial Name Footer */}
+      <div
+        className={`px-3 py-3.5 sm:py-4 text-center flex-1 flex items-center justify-center ${
+          isDarkContainer ? "bg-emerald-950/60" : "bg-white"
+        }`}
+      >
+        <h3
+          className={`text-xs sm:text-sm md:text-[15px] font-serif font-medium leading-snug transition-colors ${
+            isDarkContainer
+              ? "text-white group-hover:text-amber-300"
+              : "text-slate-800 group-hover:text-emerald-800"
+          }`}
+        >
+          {member.name}
+        </h3>
+      </div>
     </div>
   );
 }

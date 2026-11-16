@@ -1,10 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Calendar, MapPin, Download, Monitor } from 'lucide-react';
-import { ConferenceData } from '@/lib/conferenceData';
+import { ArrowRight, Calendar, MapPin, Monitor, X, Clock } from 'lucide-react';
+import { ConferenceData, EventCard } from '@/lib/conferenceData';
 
 interface ConferenceClientProps {
   data: ConferenceData;
@@ -18,6 +18,9 @@ export function ConferenceClient({ data }: ConferenceClientProps) {
     upcomingEventsSection,
     gallerySection,
   } = data;
+
+  // State for Event Details Popup Modal
+  const [selectedEvent, setSelectedEvent] = useState<EventCard | null>(null);
 
   return (
     <main className="w-full min-h-screen bg-slate-50 text-slate-800 font-sans">
@@ -95,6 +98,7 @@ export function ConferenceClient({ data }: ConferenceClientProps) {
                 src={featuredConference.image}
                 alt={featuredConference.title}
                 fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
                 className="hidden md:block object-cover"
               />
               {/* Mobile Image */}
@@ -104,6 +108,7 @@ export function ConferenceClient({ data }: ConferenceClientProps) {
                 }
                 alt={featuredConference.title}
                 fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
                 className="block md:hidden object-cover"
               />
             </div>
@@ -157,16 +162,6 @@ export function ConferenceClient({ data }: ConferenceClientProps) {
                 <span>View Details</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
-
-              <a
-                href={featuredConference.brochureLink}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 bg-white border border-slate-300 hover:border-slate-400 text-slate-800 text-xs sm:text-sm font-medium px-6 py-3 rounded-full transition shadow-xs"
-              >
-                <span>Download Brochure</span>
-                <Download className="w-4 h-4 text-slate-600" />
-              </a>
             </div>
           </div>
         </div>
@@ -253,6 +248,7 @@ export function ConferenceClient({ data }: ConferenceClientProps) {
                     src={event.image}
                     alt={event.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="hidden md:block object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   {/* Mobile Image */}
@@ -260,6 +256,7 @@ export function ConferenceClient({ data }: ConferenceClientProps) {
                     src={event.imageMobile || event.image}
                     alt={event.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="block md:hidden object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-slate-800 text-[11px] font-medium px-3 py-1 rounded-full shadow-xs flex items-center gap-1.5">
@@ -294,13 +291,15 @@ export function ConferenceClient({ data }: ConferenceClientProps) {
               </div>
 
               <div className="px-6 pb-6 pt-0">
-                <Link
-                  href={event.link}
-                  className="inline-flex items-center gap-1.5 text-emerald-800 hover:text-emerald-700 text-xs font-semibold tracking-wide transition-colors"
+                {/* Popup Trigger Button */}
+                <button
+                  type="button"
+                  onClick={() => setSelectedEvent(event)}
+                  className="inline-flex items-center gap-1.5 text-emerald-800 hover:text-emerald-700 text-xs font-semibold tracking-wide transition-colors cursor-pointer"
                 >
                   <span>View Details</span>
                   <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                </button>
               </div>
             </div>
           ))}
@@ -336,6 +335,7 @@ export function ConferenceClient({ data }: ConferenceClientProps) {
                   src={img.src}
                   alt={img.alt}
                   fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="hidden md:block object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 {/* Mobile Image */}
@@ -343,6 +343,7 @@ export function ConferenceClient({ data }: ConferenceClientProps) {
                   src={img.srcMobile || img.src}
                   alt={img.alt}
                   fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="block md:hidden object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors" />
@@ -351,6 +352,100 @@ export function ConferenceClient({ data }: ConferenceClientProps) {
           </div>
         </div>
       </section>
+
+      {/* EVENT DETAILS POPUP MODAL */}
+      {selectedEvent && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs"
+          onClick={() => setSelectedEvent(null)}
+        >
+          <div
+            className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header Image */}
+            <div className="relative h-64 sm:h-72 w-full bg-slate-900 overflow-hidden">
+              <Image
+                src={selectedEvent.imageMobile || selectedEvent.image}
+                alt={selectedEvent.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 672px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/30 to-transparent" />
+
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={() => setSelectedEvent(null)}
+                aria-label="Close modal"
+                className="absolute top-4 right-4 p-2 rounded-full bg-slate-950/60 text-white hover:bg-slate-950 transition cursor-pointer backdrop-blur-md"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Type Badge & Date */}
+              <div className="absolute bottom-4 left-6 right-6 flex flex-wrap items-center justify-between gap-2">
+                <span className="text-xs font-bold tracking-widest uppercase bg-emerald-700 text-white px-3.5 py-1.5 rounded-full shadow-md">
+                  {selectedEvent.type}
+                </span>
+                <div className="flex items-center gap-1.5 text-xs font-medium text-amber-300 bg-slate-950/80 px-3 py-1.5 rounded-lg backdrop-blur-md border border-amber-500/30">
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>{selectedEvent.date}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6 sm:p-8 space-y-6">
+              <div>
+                <span className="text-xs font-bold tracking-wider text-amber-700 uppercase block mb-1">
+                  Theme: {selectedEvent.theme}
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-serif text-slate-900 leading-snug">
+                  {selectedEvent.title}
+                </h3>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 border-y border-slate-100">
+                <div className="flex items-center gap-3 text-sm text-slate-700">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center shrink-0">
+                    <MapPin className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+                      Location
+                    </span>
+                    <span className="font-medium text-slate-800">{selectedEvent.location}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 text-sm text-slate-700">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center shrink-0">
+                    <Clock className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+                      Format
+                    </span>
+                    <span className="font-medium text-slate-800">{selectedEvent.type} Gathering</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setSelectedEvent(null)}
+                  className="bg-slate-900 hover:bg-slate-800 text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition cursor-pointer shadow-md"
+                >
+                  Close Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
