@@ -6,10 +6,10 @@
 }
 
 @theme inline {
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,10 +19,12 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-montserrat), sans-serif;
+  }
 }
 
 @keyframes marquee {
@@ -73,8 +75,8 @@ html[lang="ar"] button {
 /* Apply Sakkal Majalla and increase font scaling when the document language is Arabic */
 html[lang="ar"] body {
   font-family: "Sakkal Majalla", "Traditional Arabic", "Times New Roman", serif !important;
-  font-size: 1.2rem !important; /* Increases the base font size */
-  line-height: 1.6 !important;   /* Improves readability for Arabic script */
+  font-size: 1.2rem !important;
+  line-height: 1.6 !important;
 }
 
 /* Ensure headings and buttons scale up proportionally in Arabic */
@@ -95,7 +97,7 @@ html[lang="ar"] button,
 html[lang="ar"] a, 
 html[lang="ar"] span, 
 html[lang="ar"] p {
-  font-size: 1.15rem !important; /* Boosts general text elements */
+  font-size: 1.15rem !important;
 }
 
 html, body {
