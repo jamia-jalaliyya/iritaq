@@ -34,7 +34,28 @@ export function MemberCard({
           : "bg-white border border-slate-200/80 shadow-xs hover:shadow-xl hover:border-emerald-700/30"
       }`}
     >
-      {/* Full-Bleed Portrait Container */}
+      {/* Top Designation Header (Outside the Photo) */}
+      {designationText && (
+        <div
+          className={`px-2.5 py-2 text-center border-b transition-colors ${
+            isAmber
+              ? "bg-amber-900/95 text-amber-50 border-amber-500/30"
+              : isDarkContainer
+              ? "bg-emerald-950/90 text-amber-300 border-emerald-800/80"
+              : "bg-[#1b4d3e] text-white border-emerald-900/15"
+          }`}
+        >
+          <span
+            className={`block font-semibold uppercase leading-[1.15] tracking-wide whitespace-normal break-words ${getFontSizeClass(
+              designationText
+            )}`}
+          >
+            {designationText}
+          </span>
+        </div>
+      )}
+
+      {/* Unobstructed Full-Bleed Portrait Container */}
       <div
         className={`relative w-full ${aspectRatio} overflow-hidden ${
           isDarkContainer ? "bg-emerald-950" : "bg-[#d8ebf9]"
@@ -47,34 +68,6 @@ export function MemberCard({
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
           className="object-cover object-[center_15%] scale-105 group-hover:scale-110 transition-transform duration-500 ease-out"
         />
-
-        {/* Smooth Gradient Vignette for Floating Pill Contrast */}
-        <div
-          className={`absolute inset-0 bg-linear-to-t ${
-            isDarkContainer
-              ? "from-emerald-950/90 via-emerald-950/15 to-transparent"
-              : "from-slate-950/75 via-slate-950/10 to-transparent"
-          } opacity-90`}
-        />
-
-        {/* Floating Glassmorphic Designation Pill */}
-        {designationText && (
-          <div className="absolute bottom-2.5 inset-x-2.5 z-10">
-            <span
-              className={`block w-full py-1.5 px-2 rounded-lg backdrop-blur-md shadow-sm font-semibold uppercase text-center leading-[1.1] tracking-wide whitespace-normal wrap-break-word transition-colors ${getFontSizeClass(
-                designationText
-              )} ${
-                isAmber
-                  ? "bg-amber-900/90 text-amber-50 border border-amber-500/40"
-                  : isDarkContainer
-                  ? "bg-emerald-950/85 text-amber-300 border border-emerald-700/60"
-                  : "bg-[#1b4d3e]/90 text-white border border-white/15"
-              }`}
-            >
-              {designationText}
-            </span>
-          </div>
-        )}
       </div>
 
       {/* Unified Editorial Name Footer */}

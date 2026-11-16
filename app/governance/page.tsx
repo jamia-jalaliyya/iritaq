@@ -190,23 +190,29 @@ export default async function GovernancePage() {
           </div>
 
           {/* Advisory Board (Right Side Green Card - 5 Cols) */}
-          <div className="lg:col-span-5 bg-emerald-950 text-white rounded-3xl p-8 sm:p-10 shadow-xl border border-emerald-900/60">
-            <h2 className="text-2xl md:text-3xl font-serif text-white mb-4">
-              {data.advisoryBoard.title}
-            </h2>
-            <div className="space-y-4 text-white text-xs sm:text-sm leading-relaxed mb-8">
-              <p>{data.advisoryBoard.description}</p>
-              {data.advisoryBoard.secondaryDescription && (
-                <p>{data.advisoryBoard.secondaryDescription}</p>
-              )}
-            </div>
+<div className="lg:col-span-5 bg-emerald-950 text-white rounded-3xl p-8 sm:p-10 shadow-xl border border-emerald-900/60">
+  <h2 className="text-2xl md:text-3xl font-serif text-white mb-4">
+    {data.advisoryBoard.title}
+  </h2>
+  <div className="space-y-4 text-white text-xs sm:text-sm leading-relaxed mb-8">
+    <p>{data.advisoryBoard.description}</p>
+    {data.advisoryBoard.secondaryDescription && (
+      <p>{data.advisoryBoard.secondaryDescription}</p>
+    )}
+  </div>
 
-            <div className="grid grid-cols-2 gap-6">
-              {data.advisoryBoard.members.map((m) => (
-                <MemberCard key={m.id} member={m as LeadershipMember} isDarkContainer />
-              ))}
-            </div>
-          </div>
+  {/* Changed grid-cols-2 gap-6 to be compact on mobile */}
+  <div className="grid grid-cols-2 gap-4 sm:gap-6">
+    {data.advisoryBoard.members.map((m) => (
+      <MemberCard 
+        key={m.id} 
+        member={m as LeadershipMember} 
+        isDarkContainer 
+        aspectRatio="aspect-[3/4]"
+      />
+    ))}
+  </div>
+</div>
 
         </div>
       </section>
@@ -248,8 +254,8 @@ export default async function GovernancePage() {
               )}
             </div>
 
-            {/* Member Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {/* Member Cards Grid - Changed grid-cols-1 to grid-cols-2 for compact mobile display */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
               {data.executiveLeadership.members.map((m) => (
                 <MemberCard 
                   key={m.id} 
@@ -272,7 +278,7 @@ export default async function GovernancePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
               {data.researchFaculty.members.map((m) => (
                 <MemberCard key={m.id} member={m as LeadershipMember} />
               ))}
