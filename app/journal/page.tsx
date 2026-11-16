@@ -126,7 +126,7 @@ export default function AcademicJournalPage() {
               <div className="space-y-3 z-10">
                 <div className="flex justify-between items-center text-[10px] tracking-widest uppercase text-amber-400 font-semibold border-b border-amber-500/30 pb-2">
                   <span>Peer-Reviewed</span>
-                  <span>MJIS</span>
+                  
                 </div>
                 <div>
                   <span className="text-[10px] text-emerald-300 uppercase tracking-wider block">Iritaq Publication</span>
