@@ -13,8 +13,15 @@ const montserrat = Montserrat({
 
 
 export const metadata: Metadata = {
-  title: "IRITAQ - Institute of Qur'anic Studies",
-  description: "Advancing Knowledge Through Excellence in Qur'anic Studies",
+  metadataBase: new URL('https://iritaq.info'),
+  title: {
+    default: ' IRITAQ ',
+    template: '%s | INTERNATIONAL RESEARCH INSTITUTE FOR TAFSIR AL-QURAN',
+  },
+  description: 'The International Research Institute for Tafsir al-Quran (IRITAQ) is a premier international academic and research institution established under the auspices of Al-Jamia Al-Jalaliyya in Kerala, India. As a flagship initiative of the Syed Muhammad Ali Shihab Thangal Research Consortium',
+  alternates: {
+    canonical: './',
+  },
 };
 
 export default function RootLayout({
